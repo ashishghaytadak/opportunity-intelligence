@@ -1,0 +1,11 @@
+{
+  "name": "opportunity-intelligence",
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true
+    }
+  ],
+  "sourceApiVersion": "64.0",
+  "sfdcLoginUrl": "https://login.salesforce.com"
+}

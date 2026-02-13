@@ -1,0 +1,122 @@
+/* Summary stats bar */
+.summary-bar {
+    background: #f3f3f3;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 0.75rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #706e6b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #080707;
+}
+
+.stat-box.hot-count .stat-value {
+    color: #2e844a;
+}
+
+.stat-box.warm-count .stat-value {
+    color: #fe9339;
+}
+
+.stat-box.cold-count .stat-value {
+    color: #c23934;
+}
+
+/* Filter combobox */
+.filter-combobox {
+    max-width: 200px;
+}
+
+/* Score progress bar */
+.score-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 120px;
+}
+
+.score-bar-container {
+    flex: 1;
+    height: 8px;
+    background: #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+    min-width: 60px;
+}
+
+.score-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.score-value {
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 36px;
+}
+
+/* Category badges */
+.slds-badge.badge-hot {
+    background-color: #2e844a;
+    color: white;
+}
+
+.slds-badge.badge-warm {
+    background-color: #fe9339;
+    color: #080707;
+}
+
+.slds-badge.badge-cold {
+    background-color: #c23934;
+    color: white;
+}
+
+/* Sort headers */
+.sort-header {
+    color: #0176d3;
+    text-decoration: none;
+}
+
+.sort-header:hover {
+    text-decoration: underline;
+}
+
+.sort-indicator {
+    margin-left: 2px;
+    font-size: 0.75rem;
+}
+
+/* Opportunity link */
+.opp-link {
+    color: #0176d3;
+    text-decoration: none;
+}
+
+.opp-link:hover {
+    text-decoration: underline;
+}
+
+/* Empty state */
+.empty-state {
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Table responsive */
+.opp-table {
+    font-size: 0.875rem;
+}

@@ -1,0 +1,107 @@
+<template>
+    <lightning-card title="Opportunity Intelligence Dashboard" icon-name="standard:opportunity">
+        <!-- Summary Stats Bar -->
+        <div class="slds-p-around_medium slds-grid slds-wrap slds-gutters summary-bar">
+            <div class="slds-col slds-size_1-of-5 slds-p-around_small stat-box">
+                <div class="stat-label">Total Open Opps</div>
+                <div class="stat-value">{totalOpenOpps}</div>
+            </div>
+            <div class="slds-col slds-size_1-of-5 slds-p-around_small stat-box">
+                <div class="stat-label">Average Score</div>
+                <div class="stat-value">{averageScore}</div>
+            </div>
+            <div class="slds-col slds-size_1-of-5 slds-p-around_small stat-box hot-count">
+                <div class="stat-label">Hot</div>
+                <div class="stat-value">{hotCount}</div>
+            </div>
+            <div class="slds-col slds-size_1-of-5 slds-p-around_small stat-box warm-count">
+                <div class="stat-label">Warm</div>
+                <div class="stat-value">{warmCount}</div>
+            </div>
+            <div class="slds-col slds-size_1-of-5 slds-p-around_small stat-box cold-count">
+                <div class="stat-label">Cold</div>
+                <div class="stat-value">{coldCount}</div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="slds-p-horizontal_medium slds-p-bottom_small">
+            <lightning-combobox
+                name="categoryFilter"
+                label="Filter by Score Category"
+                value={selectedCategory}
+                options={categoryOptions}
+                onchange={handleCategoryChange}
+                class="filter-combobox">
+            </lightning-combobox>
+        </div>
+
+        <!-- Opportunities Table -->
+        <div class="slds-p-horizontal_medium slds-p-bottom_medium">
+            <template lwc:if={hasOpportunities}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered opp-table">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="slds-text-title_caps" scope="col">
+                                <a href="#" onclick={handleSortName} role="button" class="sort-header">
+                                    Name <template lwc:if={sortByName}><span class="sort-indicator">{sortDirection}</span></template>
+                                </a>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <a href="#" onclick={handleSortStage} role="button" class="sort-header">
+                                    Stage <template lwc:if={sortByStage}><span class="sort-indicator">{sortDirection}</span></template>
+                                </a>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <a href="#" onclick={handleSortAmount} role="button" class="sort-header">
+                                    Amount <template lwc:if={sortByAmount}><span class="sort-indicator">{sortDirection}</span></template>
+                                </a>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <a href="#" onclick={handleSortScore} role="button" class="sort-header">
+                                    Score <template lwc:if={sortByScore}><span class="sort-indicator">{sortDirection}</span></template>
+                                </a>
+                            </th>
+                            <th class="slds-text-title_caps" scope="col">Category</th>
+                            <th class="slds-text-title_caps" scope="col">
+                                <a href="#" onclick={handleSortCloseDate} role="button" class="sort-header">
+                                    Close Date <template lwc:if={sortByCloseDate}><span class="sort-indicator">{sortDirection}</span></template>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={filteredAndSortedOpportunities} for:item="opp">
+                            <tr key={opp.Id} class="slds-hint-parent">
+                                <td data-label="Name">
+                                    <a href={opp.recordUrl} class="opp-link">{opp.Name}</a>
+                                </td>
+                                <td data-label="Stage">{opp.StageName}</td>
+                                <td data-label="Amount">{opp.formattedAmount}</td>
+                                <td data-label="Score">
+                                    <div class="score-cell">
+                                        <div class="score-bar-container">
+                                            <div class="score-bar" style={opp.scoreBarStyle}></div>
+                                        </div>
+                                        <span class="score-value">{opp.scoreDisplay}</span>
+                                    </div>
+                                </td>
+                                <td data-label="Category">
+                                    <span class={opp.categoryBadgeClass}>{opp.Score_Category__c}</span>
+                                </td>
+                                <td data-label="Close Date">{opp.formattedCloseDate}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+            <template lwc:else>
+                <div class="slds-illustration slds-illustration_small empty-state">
+                    <div class="slds-text-body_regular slds-text-color_weak">
+                        No opportunities found. Score your opportunities to see them here.
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
