@@ -11,6 +11,8 @@ public with sharing class ScoreOpportunityInvocable {
 
     @InvocableMethod(label='Score Opportunity' description='Calculates predictive opportunity score')
     public static void score(List<ScoreRequest> requests) {
+        if (requests == null || requests.isEmpty()) return;
+
         List<Id> oppIds = new List<Id>();
         for (ScoreRequest req : requests) {
             oppIds.add(req.oppId);
